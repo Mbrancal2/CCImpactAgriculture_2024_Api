@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/CCImpactAgriculture_2024_Api.props" />
+</Project>

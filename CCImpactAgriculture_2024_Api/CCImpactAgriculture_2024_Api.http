@@ -1,0 +1,6 @@
+@CCImpactAgriculture_2024_Api_HostAddress = http://localhost:5005
+
+GET {{CCImpactAgriculture_2024_Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

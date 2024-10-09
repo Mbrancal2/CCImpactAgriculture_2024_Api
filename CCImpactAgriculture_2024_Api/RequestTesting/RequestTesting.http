@@ -1,0 +1,332 @@
+
+#################for testing Years#####################################
+###for testing Years/{year:int}: test1: valid year: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Years/2024
+
+###for testing Years/{year:int}: test2: invalid year: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Years/1
+
+###for testing Years/{year:int}: test3: invalid year: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Years/
+
+
+###for testing Years: test1: from is valid and to is valid: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Years?from=1990&to=2024
+
+###for testing Years: test2: from is invalid and to is valid: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Years?from=1&to=2024
+
+###for testing Years: test3: from is valid and to is invalid: should not work
+GET https://localhost:7115/api/CCImpactAgriculture/Years?from=2024&to=1989
+
+###for testing Years: test4: from is invalid and to is invalid: should not work
+GET https://localhost:7115/api/CCImpactAgriculture/Years?from=-1&to=1989
+
+
+###############################for testing Countries#################################
+
+###for testing Countries/{country}: test1: valid input: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Countries/India
+
+###for testing Countries/{country}: test2: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Countries/I
+
+###for testing Countries/{country}: test3: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Countries/
+
+
+########################################for testing Region###############################
+
+###for Regions/{region}: test1: valid input: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Regions/Midwest
+
+###for Regions/{region}: test2: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Regions/M
+
+###for Regions/{region}: test3: valid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Regions/
+
+
+####################################for testing Crop_Types/{crop_type}######################
+
+###for testing Crop_Types/{crop_type}: test1: valid input: should work
+GET  https://localhost:7115/api/CCImpactAgriculture/Crop_Types/Corn
+
+###for testing Crop_Types/{crop_type}: test1: invalid input: should return an error
+GET  https://localhost:7115/api/CCImpactAgriculture/Crop_Types/C
+
+###for testing Crop_Types/{crop_type}: test1: invalid input: should return an error
+GET  https://localhost:7115/api/CCImpactAgriculture/Crop_Types/
+
+##############tests fro Average_Temperatures##########################
+
+###for Average_Temperatures/{temp:decimal}: test1 : min val
+GET  https://localhost:7115/api/CCImpactAgriculture/Average_Temperatures/-4.99
+
+###for Average_Temperatures/{temp:decimal}: test2 : max val
+GET  https://localhost:7115/api/CCImpactAgriculture/Average_Temperatures/35.00
+
+###for Average_Temperatures/{temp:decimal}: test3 : max val but as an int
+GET  https://localhost:7115/api/CCImpactAgriculture/Average_Temperatures/35
+
+###for Average_Temperatures/{temp:decimal}: test4: a val not in the table:
+GET  https://localhost:7115/api/CCImpactAgriculture/Average_Temperatures/36.00
+
+###for testing Average_Temperatures: test1: min val only
+GET https://localhost:7115/api/CCImpactAgriculture/Average_Temperatures?min=35.00
+
+###for testing Average_Temperatures: test2: max val only
+GET https://localhost:7115/api/CCImpactAgriculture/Average_Temperatures?max=35.00
+
+###for testing Average_Temperatures: test1: min and max with values in right range
+GET https://localhost:7115/api/CCImpactAgriculture/Average_Temperatures?min=-4.99&max=35.00
+
+###for testing Average_Temperatures: test1: min = null and max = null
+GET https://localhost:7115/api/CCImpactAgriculture/Average_Temperatures
+
+
+################################tests for Total_Precipitation_mm#############################
+
+###for testing Total_Precipitation/{Total_Precipitation_mm}
+GET https://localhost:7115/api/CCImpactAgriculture/Total_Precipitation/200.15
+
+###for testing Total_Precipitation: test1: min is vald and max is valid
+GET https://localhost:7115/api/CCImpactAgriculture/Total_Precipitation?min=200.15&max=2999.67
+
+###for testing Total_Precipitation: test2: min is valid max is null
+GET https://localhost:7115/api/CCImpactAgriculture/Total_Precipitation?min=200.15
+
+###for testing Total_Precipitation: test3: min is null and max is valid
+GET https://localhost:7115/api/CCImpactAgriculture/Total_Precipitation?max=2999.67
+
+###for testing Total_Precipitation: test4: min = null & max = null
+GET https://localhost:7115/api/CCImpactAgriculture/Total_Precipitation
+
+
+#######################################################for testing CO2_Emissions##########################
+
+###for testing CO2_Emissions/{CO2_Emissions_MT}
+GET https://localhost:7115/api/CCImpactAgriculture/CO2_Emissions/30.00
+
+###for testing CO2_Emissions: test1: min is valid and max is valid
+GET https://localhost:7115/api/CCImpactAgriculture/CO2_Emissions?min=0.500&max=30.00
+
+###for testing CO2_Emissions: test2: min is valid and max is not: should return 404
+GET https://localhost:7115/api/CCImpactAgriculture/CO2_Emissions?min=0.50&max=-1
+
+###for testing CO2_Emissions: test3: min is valid and max is not: should return all records
+GET https://localhost:7115/api/CCImpactAgriculture/CO2_Emissions?min=0.50&max=31
+
+###for testing CO2_Emissions: test4: min is valid and max is not: should return all records
+GET https://localhost:7115/api/CCImpactAgriculture/CO2_Emissions?min=0.50&max=31
+
+###for testing CO2_Emissions: test5: min is not valid and max is valid: should return all records
+GET https://localhost:7115/api/CCImpactAgriculture/CO2_Emissions?min=-1&max=30.00
+
+###for testing CO2_Emissions: test6: min = null and max is valid: should return records
+GET https://localhost:7115/api/CCImpactAgriculture/CO2_Emissions?max=30.00
+
+###for testing CO2_Emissions: test7: min is valid and max = null: should return records
+GET https://localhost:7115/api/CCImpactAgriculture/CO2_Emissions?min=0.50
+
+###for testing CO2_Emissions: test8: min = valid and max = null: should return an error:
+GET https://localhost:7115/api/CCImpactAgriculture/CO2_Emissions?min=0.50
+
+
+##########################################for testing Crop_Yeild###########################
+
+###for testing Crop_Yeild/{Crop_Yield_MT_per_HA}: test1: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Crop_Yeild/5.00
+
+###for testing Crop_Yeild/{Crop_Yield_MT_per_HA}: test2: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Crop_Yeild/-1
+
+###for testing Crop_Yeild/{Crop_Yield_MT_per_HA}: test3: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Crop_Yeild/
+
+
+
+###for testing Crop_Yeild : test1: min is valid and max is valid: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Crop_Yeild?min=0.45&max=5.00
+
+###for testing Crop_Yeild : test2: min is valid and max is not: should return 404
+GET https://localhost:7115/api/CCImpactAgriculture/Crop_Yeild?min=0.45&max=-1
+
+###for testing Crop_Yeild : test3: min is not valid and max is valid: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Crop_Yeild?min=-0.45&max=5.00
+
+###for testing Crop_Yeild : test4: min is valid and max = null: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Crop_Yeild?min=0.45
+
+###for testing Crop_Yeild : test5: min = null and max is valid: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Crop_Yeild?max=5.00
+
+###for testing Crop_Yeild : test6: min = null and max = null: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Crop_Yeild
+
+
+##############################for testing Extreme_Weather_Events
+
+###for testing Extreme_Weather_Event/{Extreme_Weather_Events:int}: test1: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Extreme_Weather_Event/10
+
+###for testing Extreme_Weather_Event/{Extreme_Weather_Events:int}: test2: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Extreme_Weather_Event/
+
+###for testing Extreme_Weather_Event: test1: min is valid and max is valid: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Extreme_Weather_Event?min=0&max=10
+
+###for testing Extreme_Weather_Event: test2: min is not valid and max is valid: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Extreme_Weather_Event?min=-1&max=10
+
+###for testing Extreme_Weather_Event: test3: min is valid and max is not valid: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Extreme_Weather_Event?min=0&max=-1
+
+###for testing Extreme_Weather_Event: test4: min is not valid and max is not valid: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Extreme_Weather_Event?min=-1&max=-10
+
+###for testing Extreme_Weather_Event: test5: min = null and max is valid: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Extreme_Weather_Event?max=10
+
+###for testing Extreme_Weather_Event: test6: min is valid and max = null: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Extreme_Weather_Event?min=0
+
+###for testing Extreme_Weather_Event: test7: min = null and max = null: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Extreme_Weather_Event
+
+
+#################################################for testing Irragation_Access_Percentage#####################
+
+###for testing Irragation_Access_Percentage/{ Irrigation_Access_Per:decimal}: test1: valid input: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Irragation_Access_Percentage/10.01
+
+###for testing Irragation_Access_Percentage/{ Irrigation_Access_Per:decimal}: test2: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Irragation_Access_Percentage/-1
+
+###for testing Irragation_Access_Percentage/{ Irrigation_Access_Per:decimal}: test3: valid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Irragation_Access_Percentage/
+
+###for testing Irragation_Access_Percentage: test1: valid min and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Irragation_Access_Percentage?min=10.01&max=99.99
+
+###for testing Irragation_Access_Percentage: test2: invalid min and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Irragation_Access_Percentage?min=-10.01&max=99.99
+
+###for testing Irragation_Access_Percentage: test3: valid min and invalid max: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Irragation_Access_Percentage?min=10.01&max=-99.99
+
+###for testing Irragation_Access_Percentage: test4: min = null and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Irragation_Access_Percentage?max=99.99
+
+###for testing Irragation_Access_Percentage: test5: valid min and max = null: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Irragation_Access_Percentage?min=10.01
+
+###for testing Irragation_Access_Percentage: test6: min = null and max = null: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Irragation_Access_Percentage
+
+
+################################for testing Pesticide_Useage##############################################################
+
+###for testing Pesticide_Useage/{Pesticide_Use_KG_per_HA:decimal}: test1: valid input: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Pesticide_Useage/49.99
+
+###for testing Pesticide_Useage/{Pesticide_Use_KG_per_HA:decimal}: test2: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Pesticide_Useage/-49.99
+
+###for testing Pesticide_Useage/{Pesticide_Use_KG_per_HA:decimal}: test3: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Pesticide_Useage/
+
+###for testing Pesticide_Useage: test1: valid min and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Pesticide_Useage?min=0.00&max=49.99
+
+###for testing Pesticide_Useage: test2: invalid min and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Pesticide_Useage?min=-1&max=49.99
+
+###for testing Pesticide_Useage: test3: valid min and invalid max: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Pesticide_Useage?min=0.00&max=-49.99
+
+###for testing Pesticide_Useage: test4: min = null and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Pesticide_Useage?max=49.99
+
+###for testing Pesticide_Useage: test5: valid min and max = null: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Pesticide_Useage?min=0.00
+
+###for testing Pesticide_Useage: test6: min = null and max = null: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Pesticide_Useage
+
+
+#################for testing Soil_Health_Index######################################################
+
+###for testing Soil_Health_Index/{Soil_Health_Index:decimal}: test1: valid input: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Soil_Health_Index/100.00
+
+###for testing Soil_Health_Index/{Soil_Health_Index:decimal}: test2: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Soil_Health_Index/-100.00
+
+###for testing Soil_Health_Index/{Soil_Health_Index:decimal}: test3: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Soil_Health_Index/
+
+###for testing Soil_Health_Index: test1: valid min and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Soil_Health_Index?min=30.00&max=100.00
+
+###for testing Soil_Health_Index: test2: invalid min and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Soil_Health_Index?min=-30.00&max=100.00
+
+###for testing Soil_Health_Index: test3: valid min and invalid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Soil_Health_Index?min=30.00&max=30.25
+
+###for testing Soil_Health_Index: test4: valid min and invalid max: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Soil_Health_Index?min=30.00&max=-100.00
+
+###for testing Soil_Health_Index: test5: min = null and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Soil_Health_Index?max=100.00
+
+###for testing Soil_Health_Index: test6: valid min and max = null: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Soil_Health_Index?min=30.00
+
+###for testing Soil_Health_Index: test7: min = null and max = null: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Soil_Health_Index
+
+##########################################testing for Adaptation_Strategies###########################
+
+###for testing Adaptation_Strategies/{adaptation_strategies}: test1: valid input: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Adaptation_Strategies/Water%20Management
+
+###for testing Adaptation_Strategies/{adaptation_strategies}: test2: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Adaptation_Strategies/Water%20Ma
+
+###for testing Adaptation_Strategies/{adaptation_strategies}: test3: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Adaptation_Strategies/
+
+
+#######################################for testing Economic_Impac##############################################
+
+###for testing Economic_Impact/{Economic_Impact_Million_USD:decimal}: test1: valid input: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Economic_Impact/2346.47
+
+###for testing Economic_Impact/{Economic_Impact_Million_USD:decimal}: test1: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Economic_Impact/1000
+
+###for testing Economic_Impact/{Economic_Impact_Million_USD:decimal}: test1: invalid input: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Economic_Impact/
+
+###for testing Economic_Impact: test1: valid min and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Economic_Impact?min=47.84&max=2346.47
+
+###for testing Economic_Impact: test1: invalid min and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Economic_Impact?min=-47.84&max=2346.47
+
+###for testing Economic_Impact: test1: valid min and invalid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Economic_Impact?min=47.84&max=1000
+
+###for testing Economic_Impact: test1: valid min and invalid max: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Economic_Impact?min=47.84&max=-2346.47
+
+###for testing Economic_Impact: test1: min = null and valid max: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Economic_Impact?max=2346.47
+
+###for testing Economic_Impact: test1: valid min and max = null: should work
+GET https://localhost:7115/api/CCImpactAgriculture/Economic_Impact?min=47.84
+
+###for testing Economic_Impact: test1: min = null and max = null: should return an error
+GET https://localhost:7115/api/CCImpactAgriculture/Economic_Impact
